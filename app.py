@@ -1,4 +1,4 @@
-"""Python file to serve as the frontend"""
+"""This code is  written by Maximilien contact me via mail if you have any questions e.maximilien.k@protonmail.com"""
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
@@ -9,6 +9,7 @@ from langchain.chains import ConversationChain
 from langchain.llms import OpenAI
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 token = os.environ.get("openai-key")
 
@@ -26,9 +27,6 @@ def load_chain_loc():
 	location_chain = LLMChain(llm=llm, prompt=prompt_template)
 	return location_chain
 
-loc_chain = load_chain_loc()
-
-
 def  load_chain_meal():
 	template = """Given a meal, give a short and simple recipe on how to make that dish at home.
 	% MEAL
@@ -41,13 +39,12 @@ def  load_chain_meal():
 	# Holds my 'meal' chain
 	meal_chain = LLMChain(llm=llm, prompt=prompt_template)
 	return meal_chain
-	
+
+loc_chain = load_chain_loc()	
 chain_meal =load_chain_meal()
 
 overall_chain = SimpleSequentialChain(chains=[loc_chain,chain_meal], verbose=True)
 
-	
-# From here down is all the StreamLit UI.
 st.set_page_config(page_title=" Cook bot", page_icon=":robot:")
 st.title("Cook bot powered with LLMs")
 st.write("By Maximilien ")
@@ -72,7 +69,7 @@ if user_input:
 
 	st.session_state.past.append(user_input)
 	st.session_state.generated.append(output)
-#	st.write(output)
+
 if st.session_state["generated"]:
 
 	for i in range(len(st.session_state["generated"]) - 1, -1, -1):
