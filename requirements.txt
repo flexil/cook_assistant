@@ -1,5 +1,5 @@
-openai==0.30.0
-langchain==1.0.0
-streamlit==0.88.0
-streamlit_chat==0.1.1
-python-dotenv==0.19.1
+openai
+langchain
+streamlit
+streamlit_chat
+python-dotenv
